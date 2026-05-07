@@ -156,6 +156,10 @@ created with love by spcreat
                     if (window.scrollY === 0) {
                         document.getElementById("parent").remove();
                         document.body.style.overflow = "hidden";
+
+                        setTimeout(function(){
+                            window.location.href = "/";
+                        }, 5000);
                     }
                 });
             }, 1550);

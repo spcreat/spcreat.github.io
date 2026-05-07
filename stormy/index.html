@@ -54,6 +54,10 @@ created with love by spcreat
             skyline_rift.addEventListener("click", () => {
                 audio.pause();
                 skyline.remove();
+
+                setTimeout(function(){
+                    window.location.href = "/";
+                }, 5000);
             });
 
             function update() {
