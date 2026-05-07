@@ -1,0 +1,60 @@
+html {
+    overflow: hidden;
+}
+
+@property --gradient-color-1 {
+  syntax: '<color>';
+  initial-value: magenta;
+  inherits: true;
+}
+
+@property --gradient-color-2 {
+  syntax: '<color>';
+  initial-value: magenta;
+  inherits: true;
+}
+
+@property --gradient-color-3 {
+  syntax: '<color>';
+  initial-value: magenta;
+  inherits: true;
+}
+
+.button.download-button {
+    color: black;
+
+    --gradient-color-1: #3000ff;
+    --gradient-color-2: #00ccff;
+    --gradient-color-3: #00ff00;
+
+    background: linear-gradient(
+        90deg,
+        var(--gradient-color-1),
+        var(--gradient-color-2),
+        var(--gradient-color-3),
+        var(--gradient-color-2),
+        var(--gradient-color-1)
+    );
+
+    background-size: 200% 100%;
+    background-position: 0% 0;
+
+    animation: scroll 2s linear infinite;
+    transition: --gradient-color-1 .5s, --gradient-color-2 .5s, --gradient-color-3 .5s;
+}
+
+.button.download-button:hover {
+    --gradient-color-1: #ff6e02;
+    --gradient-color-2: #ffff00;
+    --gradient-color-3: #ffffff;
+}
+
+@keyframes scroll {
+    from {
+        background-position: 0% 0;
+    }
+
+    to {
+        background-position: 200% 0;
+    }
+}
