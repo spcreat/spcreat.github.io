@@ -1,0 +1,91 @@
+<!--
+created with love by spcreat
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&#65279;</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+    <main>
+        <div style="width: 100vw; height: 100vh; display: flex; overflow: hidden; justify-content: center; align-items: center;">
+
+            <div id="skyline">
+                <div id="skyline-bg"></div>
+                <div id="skyline-rift">
+                    <img id="skyline-rift-visual" class="noselect" draggable="false" src="rift.png">
+                </div>
+            </div>
+
+            <div id="residence-div" style="max-width: 250px; animation: float 8s ease-in-out infinite;">
+                <img id="residence" src="residence.png" class="noselect" draggable="false">
+            </div>
+        </div>
+        
+    </main>
+    <script>
+        var residence = document.getElementById("residence");
+        residence.addEventListener("click", (event) => {
+            var audio = new Audio("windsfx_fadein.mp3");
+            document.getElementById("residence-div").classList.add("fade");
+
+            var mousePosX = event.x;
+            var mousePosY = event.y;
+
+            document.addEventListener("mousemove", function(event2) {
+                mousePosX = event2.x;
+                mousePosY = event2.y;
+            });
+
+            document.addEventListener("mouseleave", () => {
+                mousePosX = null;
+                mousePosY = null;
+            });
+
+            var skyline_bg = document.getElementById("skyline-bg");
+            var skyline_rift = document.getElementById("skyline-rift");
+            var skyline = document.getElementById("skyline");
+
+            skyline_rift.addEventListener("click", () => {
+                audio.pause();
+                skyline.remove();
+            });
+
+            function update() {
+                if (Number.isFinite(mousePosX) && Number.isFinite(mousePosY)) {
+                    var hoveredElem = document.elementFromPoint(mousePosX, mousePosY);
+                    if (hoveredElem === skyline_rift) {
+                        document.body.style.cursor = "pointer";
+                        skyline_rift.classList.add("hovered");
+                    } else {
+                        document.body.style.cursor = "default";
+                        skyline_rift.classList.remove("hovered");
+                    }
+                } else {
+                    document.body.style.cursor = "default";
+                    skyline_rift.classList.remove("hovered");
+                }
+
+                requestAnimationFrame(update);
+            }
+            update();
+
+            setTimeout(function(){
+                skyline.classList.add("fade");
+
+                skyline_bg.style.animationPlayState = "running";
+                skyline_rift.style.animationPlayState = "running";
+
+                audio.volume = 0.25;
+                audio.loop = true;
+                audio.play();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
